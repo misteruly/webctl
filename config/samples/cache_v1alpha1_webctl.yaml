@@ -1,0 +1,7 @@
+apiVersion: cache.harbor.misteruly.cn/v1alpha1
+kind: Webctl
+metadata:
+  name: webctl-sample
+spec:
+  # Add fields here
+  foo: bar

@@ -1,0 +1,24 @@
+# permissions for end users to edit webctls.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: webctl-editor-role
+rules:
+- apiGroups:
+  - cache.harbor.misteruly.cn
+  resources:
+  - webctls
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cache.harbor.misteruly.cn
+  resources:
+  - webctls/status
+  verbs:
+  - get
