@@ -18,6 +18,7 @@ package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -29,13 +30,17 @@ type WebctlSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of Webctl. Edit webctl_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Foo  string `json:"foo,omitempty"`
+	Size int32  `json:"size,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 // WebctlStatus defines the observed state of Webctl
 type WebctlStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	Nodes     []string              `json:"nodes"`
+	namespace namespaceClientConfig `json:"namespace,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -57,6 +62,18 @@ type WebctlList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Webctl `json:"items"`
+}
+
+type namespaceClientConfig struct {
+	namespace string
+}
+
+func (c namespaceClientConfig) ConfigAccess() clientcmd.ConfigAccess {
+	return nil
+}
+
+func (c namespaceClientConfig) RawConfig() (clientcmdapi.Config, error) {
+	return clientcmdapi.Config{}, nil
 }
 
 func init() {
