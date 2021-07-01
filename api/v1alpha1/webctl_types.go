@@ -18,7 +18,6 @@ package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/tools/clientcmd"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
@@ -39,8 +38,8 @@ type WebctlSpec struct {
 type WebctlStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	Nodes     []string              `json:"nodes"`
-	namespace namespaceClientConfig `json:"namespace,omitempty"`
+	Nodes []string `json:"nodes"`
+	//namespace namespaceClientConfig `json:"namespace,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -68,12 +67,8 @@ type namespaceClientConfig struct {
 	namespace string
 }
 
-func (c namespaceClientConfig) ConfigAccess() clientcmd.ConfigAccess {
-	return nil
-}
-
-func (c namespaceClientConfig) RawConfig() (clientcmdapi.Config, error) {
-	return clientcmdapi.Config{}, nil
+func (c namespaceClientConfig) Namespace() (string, bool, error) {
+	return c.namespace, false, nil
 }
 
 func init() {
