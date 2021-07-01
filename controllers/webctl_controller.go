@@ -97,11 +97,11 @@ func (r *WebctlReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctr
 		return ctrl.Result{RequeueAfter: time.Minute}, nil
 	}
 	podlist := &corev1.PodList{}
-	lisopts := []client.ListOptions{
+	lisOpts := []client.ListOption{
 		client.InNamespace(webctl.Namespace),
 		client.MatchingLabels(labelsForwebctl(webctl.Name)),
 	}
-	if err = r.List(ctx, podlist, lisopts...); err != nil {
+	if err = r.List(ctx, podlist, lisOpts...); err != nil {
 		log.Error(err, "failed to list pods", "webctl.Namespaces", webctl.Namespace, "webctl.Name", webctl.Name)
 		return ctrl.Result{}, err
 	}
