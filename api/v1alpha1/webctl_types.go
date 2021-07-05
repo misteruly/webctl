@@ -31,14 +31,14 @@ type WebctlSpec struct {
 	// Foo is an example field of Webctl. Edit webctl_types.go to remove/update
 	Foo  string `json:"foo,omitempty"`
 	Size int32  `json:"size,omitempty"`
-	Name string `json:"name,omitempty"`
+	//Name string `json:"name,omitempty"`
 }
 
 // WebctlStatus defines the observed state of Webctl
 type WebctlStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	Nodes []string `json:"nodes"`
+	Nodes []string `json:"nodes,omitempty"`
 	//namespace namespaceClientConfig `json:"namespace,omitempty"`
 }
 
@@ -63,13 +63,13 @@ type WebctlList struct {
 	Items           []Webctl `json:"items"`
 }
 
-type namespaceClientConfig struct {
-	namespace string
-}
-
-func (c namespaceClientConfig) Namespace() (string, bool, error) {
-	return c.namespace, false, nil
-}
+//type namespaceClientConfig struct {
+//	namespace string
+//}
+//
+//func (c namespaceClientConfig) Namespace() (string, bool, error) {
+//	return c.namespace, false, nil
+//}
 
 func init() {
 	SchemeBuilder.Register(&Webctl{}, &WebctlList{})

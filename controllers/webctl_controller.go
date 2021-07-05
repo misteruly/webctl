@@ -139,7 +139,7 @@ func (r *WebctlReconciler) deploymentforwebctl(m *cachev1alpha1.Webctl) *appsv1.
 						Image: "misteruly/hello-node:host1",
 						Name:  "k8s-webctl",
 						Ports: []corev1.ContainerPort{{
-							ContainerPort: 34000,
+							ContainerPort: 8080,
 							Name:          "k8s-webctl",
 						}},
 					}},
